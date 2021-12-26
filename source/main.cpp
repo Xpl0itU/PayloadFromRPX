@@ -83,14 +83,14 @@ int main(int argc, char **argv) {
     }
 
     if (!kernelDone && !skipKernel) {
-        if (fopen("fs:/vol/external01/wiiu/payload.elf", "r") != NULL) {
+        if (fopen("fs:/vol/external01/wiiu/payloads/payload.elf", "r") != NULL) {
             DEBUG_FUNCTION_LINE("We need the kernel exploit to load the payload");
             DoKernelExploit();
         }
     }
 
     if (!loadWithoutHacks) {
-        uint32_t entryPoint = load_loader_elf_from_sd(0, "wiiu/payload.elf");
+        uint32_t entryPoint = load_loader_elf_from_sd(0, "wiiu/payloads/payload.elf");
         if (entryPoint != 0) {
             DEBUG_FUNCTION_LINE("New entrypoint at %08X", entryPoint);
 
@@ -170,7 +170,7 @@ void SplashScreen(int32_t durationInMs) {
     OSScreenClearBufferEx(SCREEN_TV, 0);
     OSScreenClearBufferEx(SCREEN_DRC, 0);
 
-    std::string message1 = "Failed to load sd:/wiiu/payload.elf";
+    std::string message1 = "Failed to load sd:/wiiu/payloads/payload.elf";
     std::string message2 = "Starting the console without any modifcations.";
 
     OSScreenPutFontEx(SCREEN_TV, 0, 0, message1.c_str());
